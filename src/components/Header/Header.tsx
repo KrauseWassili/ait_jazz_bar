@@ -21,14 +21,14 @@ export default function Header() {
               href={"/events/new"}
               className="text-background hover:text-foreground transition-colors"
             >
-              Create event
+              Add event
             </Link>
             
             <Link
               href={"/profile"}
               className="text-background hover:text-foreground transition-colors"
             >
-              Profile
+              Our team
             </Link>
             <Link
               href={"/about"}
