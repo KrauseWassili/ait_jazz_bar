@@ -12,6 +12,7 @@ const EventsPage = async ({}) => {
         <li key={event.id} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
           <h3 className="text-xl font-semibold text-gray-700 mb-2">{event.name}</h3>
           <p className="text-gray-600">{event.description}</p>
+          
         </li>
         ))}
       </ul>
