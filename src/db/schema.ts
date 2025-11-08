@@ -6,18 +6,14 @@ import { pgTable, integer, varchar, serial, text } from "drizzle-orm/pg-core";
 // мигрируем npx drizzle-kit migrate  -внесет изменения в базу данных
 
 export const events = pgTable("events", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  description: varchar({ length: 255 }).notNull(),
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  place: varchar("text", {length: 255}),
+  description: text("description"),
+  date: varchar("date", {length: 100}),
+  imageUrl: text("image_url"),
 });
 
 
 
-export const users = pgTable("users", {
-  id: serial().primaryKey(),
-  name: varchar({ length: 255 }).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
-  image: text(),
-  role: varchar({ length: 100 }).notNull().default("customer"),
-});
 

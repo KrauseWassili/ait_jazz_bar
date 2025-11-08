@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import Header from "@/components/Header/Header";
 import { ThemeProvider } from "next-themes";
 import { Providers } from "./providers/providers";
+import "../styles/global.css";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tabletops",
-  description: "Everything about games",
+  title: "ait-jazz-bar",
+  description: "Everything about artists",
 };
 
 export default function RootLayout({
