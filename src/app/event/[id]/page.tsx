@@ -9,7 +9,7 @@ const events = [
     place: "Berlin",
     description: "An incredible evening with live music and the atmosphere of the 60s.",
     image: "/images/jazz1.jpg",
-    link: "https://example.com/jazz-night",
+    link: "https://www.eventportal.de/kuenstler/event-partysaxofonist-olli-r/",
   },
   {
     id: 2,
