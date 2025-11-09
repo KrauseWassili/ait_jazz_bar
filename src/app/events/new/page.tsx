@@ -1,10 +1,8 @@
 "use client";
-import { db } from "@/db";
-import { events as eventsTable } from "@/db/schema";
-import createEvent from "../actions/create-event";
+import createEvent from "../../actions/create-event";
 import { useState } from "react";
 import NewArtist from "@/components/new-artist";
-import Artist from "../types/Artist";
+import Artist from "../../types/Artist";
 
 const NewEvent = () => {
   const [artistArray, setArtistArray] = useState<Artist[]>([]);

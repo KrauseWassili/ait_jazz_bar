@@ -1,14 +1,17 @@
 import { db } from "@/db";
 import { events as eventsTable } from "@/db/schema";
 import { artists as artistsTable } from "@/db/schema";
-import Artist from "../types/Artist";
+import Artist from "../../types/Artist";
 import { eq } from "drizzle-orm";
-import JazzBarEvent from "../types/Jazz-bar-event";
-import EditEvent from "@/components/edit-event";
+import JazzBarEvent from "../../types/Jazz-bar-event";
 
-const SandBox = async ({}) => {
-  const id = 1;
-
+export default async function EventPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const id = Number((await params).id);
+  
   const [eventRaw] = await db
     .select()
     .from(eventsTable)
@@ -28,12 +31,11 @@ const SandBox = async ({}) => {
     return acc;
   }, {} as Record<number, Artist[]>);
 
-// if(false)
-// return <EditEvent event={event} artists={artists} />
+  // if(false)
+  // return <EditEvent event={event} artists={artists} />
 
   return (
     <div>
-      
       {/* <button type="button" name="edit" onClick={()=>setEdit(!edit)}>Edit event</button> */}
       <section>
         <h3 className="text-3xl">{event.title}</h3>
@@ -43,7 +45,7 @@ const SandBox = async ({}) => {
         <p>{event.description}</p>
         <h4 className="text-2xl">Artists</h4>
 
-        {artistsByEventId[event.id] ? (
+        {/* {artistsByEventId[event.id] ? (
           <ul>
             {artistsByEventId[event.id].map((artist) => (
               <li key={artist.id}>
@@ -59,10 +61,8 @@ const SandBox = async ({}) => {
               </li>
             ))}
           </ul>
-        ) : null}
+        ) : null} */}
       </section>
     </div>
   );
-};
-
-export default SandBox;
+}

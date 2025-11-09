@@ -8,25 +8,22 @@ export default function Header() {
       <div>
         <nav className="bg-accent p-4">
           <div className="flex space-x-6 justify-center">
-            
-            <Link
-              href={"/sandbox"}
-              className="text-background hover:text-foreground transition-colors"
-            >
-              Event 1
-            </Link>
-            
-            
             <Link
               href={"/home"}
               className="text-background hover:text-foreground transition-colors"
             >
               Home
             </Link>
-            
-           
+
             <Link
-              href={"/new-event"}
+              href={"/events"}
+              className="text-background hover:text-foreground transition-colors"
+            >
+              Events
+            </Link>
+                      
+            <Link
+              href={"/events/new"}
               className="text-background hover:text-foreground transition-colors"
             >
               Create event
