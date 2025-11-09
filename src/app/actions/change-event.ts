@@ -6,8 +6,16 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { redirect } from "next/navigation";
 import z from "zod";
 import Artist from "../types/Artist";
+import { eq } from "drizzle-orm";
 
 const EventInsertSchema = z.object({
+  id: z
+    .string()
+    .refine(
+      (v) => !isNaN(Number(v)) && Number(v) >= 0,
+      "Must be positive number"
+    )
+    .transform((v) => Number(v)),
   title: z
     .string()
     .trim()
@@ -41,18 +49,14 @@ const EventInsertSchema = z.object({
   // .max(250, "Too long, must be under 250"),
 });
 
-export default async function createEvent(formData: FormData) {
-  
+export default async function changeEvent(formData: FormData) {
   const data = Object.fromEntries(
     Array.from(formData.entries()).map(([k, v]) => [k, v.toString()])
   );
 
   const newEvent = EventInsertSchema.parse(data);
 
-  const [postedEvent] = await db
-    .insert(events)
-    .values(newEvent)
-    .returning({ id: events.id });
+  await db.update(events).set(newEvent).where(eq(events.id, newEvent.id));
 
   const artistsRaw = formData.get("artistsArray");
   let artistsArray: Artist[] = [];
@@ -60,17 +64,16 @@ export default async function createEvent(formData: FormData) {
     artistsArray = JSON.parse(artistsRaw);
   }
 
-  const artistsToInsert = artistsArray.map((artist) => ({
-    artistName: artist.artistName,
-    instrumentRole: artist.instrumentRole,
-    artistImage: artist.artistImage,
-    eventId: postedEvent.id, 
-  }));
+  // const artistsToInsert = artistsArray.map((artist) => ({
+  //   artistName: artist.artistName,
+  //   instrumentRole: artist.instrumentRole,
+  //   artistImage: artist.artistImage,
+  //   eventId: postedEvent.id,
+  // }));
 
-  if (artistsToInsert.length > 0) {
-    await db.insert(artists).values(artistsToInsert);
-  }
-
+  // if (artistsToInsert.length > 0) {
+  //   await db.update(artists).values(artistsToInsert);
+  // }
 }
 
 // TDD

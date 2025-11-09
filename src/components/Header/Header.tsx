@@ -10,6 +10,14 @@ export default function Header() {
           <div className="flex space-x-6 justify-center">
             
             <Link
+              href={"/sandbox"}
+              className="text-background hover:text-foreground transition-colors"
+            >
+              Event 1
+            </Link>
+            
+            
+            <Link
               href={"/home"}
               className="text-background hover:text-foreground transition-colors"
             >
@@ -18,7 +26,7 @@ export default function Header() {
             
            
             <Link
-              href={"/events/new"}
+              href={"/new-event"}
               className="text-background hover:text-foreground transition-colors"
             >
               Create event
