@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { db } from "@/db";
 import { events as eventsTable } from "@/db/schema";
 import { artists as artistsTable } from "@/db/schema";
@@ -16,27 +17,28 @@ const EventsPage = async () => {
   }, {} as Record<number, Artist[]>);
 
   const events: JazzBarEvent[] = eventsRaw.map((eventRaw) => ({
-  ...eventRaw,
-  description: eventRaw.description ?? "",
-  price: eventRaw.price ? Number(eventRaw.price) : 0,
-  datetime: eventRaw.datetime ? new Date(eventRaw.datetime) : null,
-}));
-
-  
+    ...eventRaw,
+    description: eventRaw.description ?? "",
+    price: eventRaw.price ? Number(eventRaw.price) : 0,
+    datetime: eventRaw.datetime ? new Date(eventRaw.datetime) : null,
+  }));
 
   return (
-    <div>
+    <div className="p-4 bg-gradient-to-r from-purple-50 via-indigo-50 to-blue-50 rounded-lg shadow-md">
       <section>
-        <h2>Events</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.map((e: JazzBarEvent) => (
-            <li key={e.id} className="col-span-1">
-              <div className="group rounded-lg bg-card text-card-foreground ring-1 ring-ring hover:shadow-lg transition-shadow">
-                <EventCard event={e} />
-              </div>
-            </li>
-          ))}
-        </ul>
+      <h2 className="text-2xl font-bold mb-4 text-indigo-700">Events</h2>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {events.map((e: JazzBarEvent) => (
+        <li key={e.id} className="col-span-1">
+          <Link
+          href={`/events/${e.id}`}
+          className="block group rounded-lg bg-white text-gray-800 ring-1 ring-gray-200 hover:shadow-lg transition-shadow p-4 border-l-4 border-transparent hover:border-indigo-400"
+          >
+          <EventCard event={e} artists={artistsByEventId[e.id] ?? []} />
+          </Link>
+        </li>
+        ))}
+      </ul>
       </section>
     </div>
   );
