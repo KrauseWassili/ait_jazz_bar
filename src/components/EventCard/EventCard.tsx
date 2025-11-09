@@ -1,4 +1,3 @@
-import { TitleLink } from "./TitleLink";
 import JazzBarEvent from "@/app/types/Jazz-bar-event";
 
 interface Props {
@@ -22,8 +21,6 @@ export const EventCard = ({ event }: Props) => {
 
   return (
     <div>
-      <TitleLink title={title} id={id} />
-
       <img src={image ?? ""} alt={title} width="200px" />
 
       <p>{place}</p>

@@ -1,7 +1,6 @@
+"use client";
 import Artist from "@/app/types/Artist";
-import { useEffect, useState } from "react";
-
-
+import { useState } from "react";
 
 interface Props {
   value: Artist[];
@@ -15,7 +14,6 @@ export default function NewArtist({ value, onChange }: Props) {
 
   function addArtistToArray() {
     const newArtist = { artistName, instrumentRole, artistImage };
-
     onChange([...value, newArtist]);
     setArtistName("");
     setInstrumentRole("");
@@ -23,32 +21,77 @@ export default function NewArtist({ value, onChange }: Props) {
   }
 
   return (
-    <div>
-      <h2>Artist</h2>
-      <input
-        placeholder="name"
-        name="artistName"
-        type="text"
-        value={artistName}
-        onChange={(e) => setArtistName(e.target.value)}
-      />
-      <input
-        placeholder="instrument_role"
-        name="instrumentRole"
-        type="text"
-        value={instrumentRole}
-        onChange={(e) => setInstrumentRole(e.target.value)}
-      />
-      <input
-        placeholder="image"
-        name="artistImage"
-        type="text"
-        value={artistImage}
-        onChange={(e) => setArtistImage(e.target.value)}
-      />
-      <button type="button" onClick={addArtistToArray}>
-        Save
-      </button>
+    <div className="bg-amber-50 p-6 rounded-lg shadow-inner space-y-6">
+      <h3 className="text-2xl font-semibold text-gray-800 text-center">
+        Add Artist
+      </h3>
+
+      <div className="space-y-4">
+        <input
+          name="artistName"
+          placeholder="Artist name"
+          type="text"
+          value={artistName}
+          onChange={(e) => setArtistName(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
+        <input
+          name="instrumentRole"
+          placeholder="Instrument or role"
+          type="text"
+          value={instrumentRole}
+          onChange={(e) => setInstrumentRole(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
+        <input
+          name="artistImage"
+          placeholder="Artist image URL"
+          type="text"
+          value={artistImage}
+          onChange={(e) => setArtistImage(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
+        {artistImage && (
+          <div className="flex justify-center">
+            <img
+              src={artistImage}
+              alt="Artist preview"
+              style={{
+                width: 300,
+                height: 300,
+                objectFit: "cover",
+                borderRadius: "0.5rem",
+                border: "1px solid #e2e8f0",
+              }}
+            />
+          </div>
+        )}
+
+        <div className="flex justify-between gap-4">
+          <button
+            type="button"
+            onClick={() => onChange(value)}
+            className="flex-1 bg-gray-300 text-gray-800 py-3 rounded-md hover:bg-gray-400 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={addArtistToArray}
+            disabled={!artistName || !instrumentRole}
+            className={`flex-1 py-3 rounded-md font-semibold transition-colors ${
+              !artistName || !instrumentRole
+                ? "bg-amber-200 text-white cursor-not-allowed"
+                : "bg-amber-600 text-white hover:bg-amber-700"
+            }`}
+          >
+            Save Artist
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
