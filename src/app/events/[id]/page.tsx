@@ -35,33 +35,103 @@ export default async function EventPage({
   // return <EditEvent event={event} artists={artists} />
 
   return (
-    <div>
+    <div className="px-4 sm:px-6 lg:px-8 ">
       {/* <button type="button" name="edit" onClick={()=>setEdit(!edit)}>Edit event</button> */}
-      <section>
-        <h3 className="text-3xl">{event.title}</h3>
-        {event.image ? (
-          <img src={event.image} alt={event.title} width="400px" />
-        ) : null}
-        <p>{event.description}</p>
-        <h4 className="text-2xl">Artists</h4>
 
+      {/* <section>
+        <h3 className="text-3xl">{event.title}</h3>
+
+        <div className="mt-4 flex flex-col md:flex-row items-center md:items-center gap-6">
+          {event.image && (
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-[350px] rounded-2xl border"
+              style={{ borderColor: "var(--border)" }}
+            />
+          )}
+
+          <p className="text-lg leading-relaxed md:self-center md:max-w-[600px]">
+            {event.description}
+          </p>
+        </div>
+      </section> */}
+      <div
+        className="mt-6 border rounded-xl shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
+        style={{
+          backgroundColor: "var(--background)",
+          borderColor: "var(--border)",
+          color: "var(--foreground)",
+        }}
+      >
+        <h4 className="text-xl font-semibold text-center">{event.title}</h4>
+
+        {event.image && (
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-60 object-cover rounded-md border"
+            style={{ borderColor: "var(--accent)" }}
+          />
+        )}
+
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm mt-2">
+          <p>
+            📍 <span style={{ color: "var(--secondary)" }}>{event.place}</span>
+          </p>
+          {event.datetime && (
+            <p>
+              🕙{" "}
+              <span style={{ color: "var(--secondary)" }}>
+                {new Date(event.datetime).toLocaleString()}
+              </span>
+            </p>
+          )}
+          <p className="font-medium">
+            💶 <span style={{ color: "var(--other)" }}>{event.price}€</span>
+          </p>
+        </div>
+      </div>
+      {/* <p className="text-base text-center">{event.description}</p> */}
+      <h4 className="text-2xl">Artists</h4>
+      <section>
         {artistsByEventId[event.id] ? (
-          <ul className="space-y-4 mt-4">
-            {artistsByEventId[event.id].map((artist) => (
-              <li key={artist.id} className="border p-4 rounded shadow-sm">
-                <p className="font-semibold">{artist.artistName}</p>
-                <p className="text-gray-600">{artist.instrumentRole}</p>
-                {artist.artistImage && (
-                  <img
-                    src={artist.artistImage}
-                    alt={artist.artistName}
-                    width={300}
-                    className="mt-2 rounded"
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 auto-rows-fr">
+              {artistsByEventId[event.id].map((artist) => (
+                <li
+                  key={artist.id}
+                  style={{
+                    backgroundColor: "var(--background)",
+                    borderColor: "var(--border)",
+                    color: "var(--foreground)",
+                  }}
+                  className="border p-4 rounded-2xl shadow-sm flex flex-col justify-between h-80"
+                >
+                  <p className="font-semibold text-center">
+                    {artist.artistName}
+                  </p>
+                  <p className="text-gray-600 text-center">
+                    {artist.instrumentRole}
+                  </p>
+                  {artist.artistImage && (
+                    <div className="flex justify-center mt-auto">
+                      <img
+                        src={artist.artistImage}
+                        alt={artist.artistName}
+                        className="mt-0.5 h-60 w-full object-contain rounded border"
+                        style={{ borderColor: "var(--accent)" }}
+                      />
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 text-center">
+              <p className="text-gray-600">☎️ {event.phone}</p>
+              <p> 📩 {event.email}</p>
+            </div>
+          </>
         ) : (
           <p className="text-gray-500">No artists listed for this event.</p>
         )}
