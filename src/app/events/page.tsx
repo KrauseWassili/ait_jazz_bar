@@ -3,8 +3,8 @@ import { db } from "@/db";
 import { events as eventsTable } from "@/db/schema";
 import { artists as artistsTable } from "@/db/schema";
 import Artist from "../types/Artist";
-import { EventCard } from "@/components/EventCard/EventCard";
 import JazzBarEvent from "../types/Jazz-bar-event";
+import { EventCard } from "@/components/EventCard/EventCard";
 
 
 const EventsPage = async () => {
@@ -25,7 +25,7 @@ const EventsPage = async () => {
   }));
 
   return (
-    <div className="p-4 min-h-screen" style={{ backgroundColor: "#688C8C" }}>
+    <div className="p-4 min-h-screen">
       <section>
       <h2 className="text-2xl font-bold mb-4 text-indigo-700">Events</h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-0.5 gap-y-8 place-items-center">

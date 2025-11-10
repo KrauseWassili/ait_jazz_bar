@@ -3,7 +3,6 @@ import JazzBarEvent from "@/app/types/Jazz-bar-event";
 
 interface Props {
   event: JazzBarEvent;
-  artists: Artist[];
 }
 
 interface Props {

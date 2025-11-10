@@ -13,7 +13,11 @@ type Props = {
   artistsData?: Artist[];
 };
 
-export default function EventForm({ mode, eventData, artistsData = [] }: Props) {
+export default function EventForm({
+  mode,
+  eventData,
+  artistsData = [],
+}: Props) {
   const [artistArray, setArtistArray] = useState<Artist[]>(artistsData);
   const [eventImageUrl, setEventImageUrl] = useState(eventData?.image || "");
   const [editingArtistIndex, setEditingArtistIndex] = useState<number | null>(
@@ -51,7 +55,7 @@ export default function EventForm({ mode, eventData, artistsData = [] }: Props) 
   const action = mode === "edit" ? updateEvent : saveEvent;
 
   return (
-    <div className="min-h-screen bg-amber-50 py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
           {mode === "edit" ? "Edit Event" : "Create New Event"}
@@ -156,9 +160,7 @@ export default function EventForm({ mode, eventData, artistsData = [] }: Props) 
               name="datetime"
               defaultValue={
                 eventData?.datetime
-                  ? new Date(eventData.datetime)
-                      .toISOString()
-                      .slice(0, 16)
+                  ? new Date(eventData.datetime).toISOString().slice(0, 16)
                   : ""
               }
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -189,12 +191,31 @@ export default function EventForm({ mode, eventData, artistsData = [] }: Props) 
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-amber-600 text-white py-4 rounded-md hover:bg-amber-700 transition-colors font-semibold"
-          >
-            {mode === "edit" ? "Save Changes" : "Save Event"}
-          </button>
+          <div className="flex justify-between gap-4 pt-4">
+            {/* Cancel */}
+            <button
+              type="button"
+              onClick={() => {
+                if (mode === "edit") {
+                  window.history.back();
+                } else {
+                  
+                  window.location.href = "/events";
+                }
+              }}
+              className="w-1/2 bg-gray-200 text-gray-800 py-4 rounded-md hover:bg-gray-300 transition-colors font-semibold"
+            >
+              Cancel
+            </button>
+
+            {/* Save */}
+            <button
+              type="submit"
+              className="w-1/2 bg-amber-600 text-white py-4 rounded-md hover:bg-amber-700 transition-colors font-semibold"
+            >
+              {mode === "edit" ? "Save Changes" : "Save Event"}
+            </button>
+          </div>
         </form>
       </div>
     </div>
