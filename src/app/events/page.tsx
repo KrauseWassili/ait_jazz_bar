@@ -3,8 +3,8 @@ import { db } from "@/db";
 import { events as eventsTable } from "@/db/schema";
 import { artists as artistsTable } from "@/db/schema";
 import Artist from "../types/Artist";
-import { EventCard } from "@/components/EventCard/EventCard";
 import JazzBarEvent from "../types/Jazz-bar-event";
+import { EventCard } from "@/components/EventCard/EventCard";
 
 
 const EventsPage = async () => {
