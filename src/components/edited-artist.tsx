@@ -7,7 +7,7 @@ interface Props {
   onChange: (artists: Artist[]) => void;
 }
 
-export default function NewArtist({ value, onChange }: Props) {
+export default function EditedArtist({ value, onChange }: Props) {
   const [artistName, setArtistName] = useState("");
   const [instrumentRole, setInstrumentRole] = useState("");
   const [artistImage, setArtistImage] = useState("");

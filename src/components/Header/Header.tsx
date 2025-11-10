@@ -9,7 +9,7 @@ export default function Header() {
         <nav className="bg-accent p-4">
           <div className="flex space-x-6 justify-center">
             <Link
-              href={"/home"}
+              href={"/"}
               className="text-background hover:text-foreground transition-colors"
             >
               Home

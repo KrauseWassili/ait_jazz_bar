@@ -1,13 +1,37 @@
 "use client";
 import createEvent from "../../actions/create-event";
 import { useState } from "react";
-import NewArtist from "@/components/new-artist";
+import EditedArtist from "@/components/edited-artist";
 import Artist from "../../types/Artist";
+import AddedArtist from "@/components/added-artist";
 
 const NewEvent = () => {
   const [artistArray, setArtistArray] = useState<Artist[]>([]);
   const [showArtistForm, setShowArtistForm] = useState(false);
   const [eventImageUrl, setEventImageUrl] = useState("");
+  const [editingArtistIndex, setEditingArtistIndex] = useState<number | null>(
+    null
+  );
+
+  const handleEditArtist = (index: number) => {
+    setEditingArtistIndex(index);
+    setShowArtistForm(true);
+  };
+
+  const handleSaveEditedArtist = (updatedArtist: Artist) => {
+    if (editingArtistIndex !== null) {
+      const updatedArray = [...artistArray];
+      updatedArray[editingArtistIndex] = updatedArtist;
+      setArtistArray(updatedArray);
+      setEditingArtistIndex(null);
+      setShowArtistForm(false);
+    }
+  };
+
+  const handleAddNewArtist = (newArray: Artist[]) => {
+    setArtistArray(newArray);
+    setShowArtistForm(false);
+  };
 
   return (
     <div className="min-h-screen bg-amber-50 py-12 px-4">
@@ -30,13 +54,13 @@ const NewEvent = () => {
               type="text"
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
-            
+
             <input
               name="image"
               placeholder="Image URL"
               type="text"
               value={eventImageUrl}
-              onChange={e => setEventImageUrl(e.target.value)}
+              onChange={(e) => setEventImageUrl(e.target.value)}
               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
 
@@ -65,7 +89,7 @@ const NewEvent = () => {
                 Add Artist
               </button>
             ) : (
-              <NewArtist
+              <EditedArtist
                 value={artistArray}
                 onChange={(newArray) => {
                   setArtistArray(newArray);
@@ -76,21 +100,13 @@ const NewEvent = () => {
 
             {artistArray.length > 0 && (
               <ul className="space-y-4">
-                {artistArray.map((artist, idx) => (
-                  <li key={idx} className="p-4 bg-amber-50 rounded-md">
-                    <div className="flex items-center gap-4">
-                      {artist.artistImage && (
-                        <img
-                          src={artist.artistImage}
-                          alt={artist.artistName}
-                          className="w-24 h-24 object-cover rounded-md"
-                        />
-                      )}
-                      <div>
-                        <p className="font-semibold">{artist.artistName}</p>
-                        <p className="text-gray-600">{artist.instrumentRole}</p>
-                      </div>
-                    </div>
+                {artistArray.map((a) => (
+                  <li
+                    key={a.id}
+                    className="p-4 bg-amber-50 rounded-md"
+                    onClick={() => handleEditArtist(a.id)}
+                  >
+                    <AddedArtist artist={a} />
                   </li>
                 ))}
               </ul>

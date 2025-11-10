@@ -18,6 +18,7 @@ export default function EditEvent({ event, artists }: Props) {
   const [artistArray, setArtistArray] = useState<Artist[]>([]);
   const [edit, setEdit] = useState(false);
 
+  
 
   //   const [event] = await db
   //     .select()
