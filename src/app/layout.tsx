@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tabletops",
+  title: "ait-jazz-bar",
   description: "Everything about games",
 };
 
