@@ -6,6 +6,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { redirect } from "next/navigation";
 import z from "zod";
 import Artist from "../types/Artist";
+import { revalidatePath } from "next/cache";
 
 const EventInsertSchema = z.object({
   title: z
@@ -41,8 +42,7 @@ const EventInsertSchema = z.object({
   // .max(250, "Too long, must be under 250"),
 });
 
-export default async function createEvent(formData: FormData) {
-  
+export default async function saveEvent(formData: FormData) {
   const data = Object.fromEntries(
     Array.from(formData.entries()).map(([k, v]) => [k, v.toString()])
   );
@@ -64,13 +64,12 @@ export default async function createEvent(formData: FormData) {
     artistName: artist.artistName,
     instrumentRole: artist.instrumentRole,
     artistImage: artist.artistImage,
-    eventId: postedEvent.id, 
+    eventId: postedEvent.id,
   }));
 
   if (artistsToInsert.length > 0) {
     await db.insert(artists).values(artistsToInsert);
   }
-
+  revalidatePath(`/events/${postedEvent.id}`);
+  redirect(`/events/${postedEvent.id}`);
 }
-
-// TDD
