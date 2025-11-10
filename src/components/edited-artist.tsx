@@ -1,54 +1,55 @@
 "use client";
 import Artist from "@/app/types/Artist";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
-  value: Artist[];
-  onChange: (artists: Artist[]) => void;
+  artist: Artist | null;
+  onSave: (artist: Artist) => void;
+  onCancel: () => void;
 }
 
-export default function EditedArtist({ value, onChange }: Props) {
+export default function EditedArtist({ artist, onSave, onCancel }: Props) {
   const [artistName, setArtistName] = useState("");
   const [instrumentRole, setInstrumentRole] = useState("");
   const [artistImage, setArtistImage] = useState("");
 
-  function addArtistToArray() {
-    const newArtist = { artistName, instrumentRole, artistImage };
-    onChange([...value, newArtist]);
-    setArtistName("");
-    setInstrumentRole("");
-    setArtistImage("");
+  useEffect(() => {
+    setArtistName(artist?.artistName || "");
+    setInstrumentRole(artist?.instrumentRole || "");
+    setArtistImage(artist?.artistImage || "");
+  }, [artist]);
+
+  function handleSave() {
+    onSave({
+      artistName,
+      instrumentRole,
+      artistImage,
+    });
   }
 
   return (
-    <div className="bg-amber-50 p-6 rounded-lg shadow-inner space-y-6">
+    <div className="bg-amber-50 p-6 rounded-lg shadow-inner space-y-6 mb-4">
       <h3 className="text-2xl font-semibold text-gray-800 text-center">
-        Add Artist
+        {artist ? "Edit Artist" : "Add Artist"}
       </h3>
 
       <div className="space-y-4">
         <input
-          name="artistName"
           placeholder="Artist name"
-          type="text"
           value={artistName}
           onChange={(e) => setArtistName(e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
         />
 
         <input
-          name="instrumentRole"
           placeholder="Instrument or role"
-          type="text"
           value={instrumentRole}
           onChange={(e) => setInstrumentRole(e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
         />
 
         <input
-          name="artistImage"
           placeholder="Artist image URL"
-          type="text"
           value={artistImage}
           onChange={(e) => setArtistImage(e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -60,8 +61,8 @@ export default function EditedArtist({ value, onChange }: Props) {
               src={artistImage}
               alt="Artist preview"
               style={{
-                width: 300,
-                height: 300,
+                width: 200,
+                height: 200,
                 objectFit: "cover",
                 borderRadius: "0.5rem",
                 border: "1px solid #e2e8f0",
@@ -73,14 +74,14 @@ export default function EditedArtist({ value, onChange }: Props) {
         <div className="flex justify-between gap-4">
           <button
             type="button"
-            onClick={() => onChange(value)}
+            onClick={onCancel}
             className="flex-1 bg-gray-300 text-gray-800 py-3 rounded-md hover:bg-gray-400 transition-colors"
           >
             Cancel
           </button>
           <button
             type="button"
-            onClick={addArtistToArray}
+            onClick={handleSave}
             disabled={!artistName || !instrumentRole}
             className={`flex-1 py-3 rounded-md font-semibold transition-colors ${
               !artistName || !instrumentRole
@@ -88,7 +89,7 @@ export default function EditedArtist({ value, onChange }: Props) {
                 : "bg-amber-600 text-white hover:bg-amber-700"
             }`}
           >
-            Save Artist
+            {artist ? "Save Changes" : "Save Artist"}
           </button>
         </div>
       </div>

@@ -34,7 +34,7 @@ const EventsPage = async () => {
           href={`/events/${e.id}`}
           className="block group rounded-lg bg-white text-gray-800 ring-1 ring-gray-200 hover:shadow-lg transition-shadow p-4 border-l-4 border-transparent hover:border-indigo-400"
           >
-          <EventCard event={e} />
+          <EventCard event={e} artists={[]} />
           </Link>
         </li>
         ))}

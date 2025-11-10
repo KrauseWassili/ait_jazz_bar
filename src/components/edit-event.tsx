@@ -2,8 +2,7 @@
 import { useState } from "react";
 import JazzBarEvent from "@/app/types/Jazz-bar-event";
 import Artist from "@/app/types/Artist";
-import changeEvent from "@/app/actions/change-event";
-
+import changeEvent from "@/app/actions/update-event";
 
 interface Props {
   event: JazzBarEvent;
@@ -11,14 +10,10 @@ interface Props {
 }
 
 export default function EditEvent({ event, artists }: Props) {
-
-    const id = 1;
-
+  const id = 1;
 
   const [artistArray, setArtistArray] = useState<Artist[]>([]);
   const [edit, setEdit] = useState(false);
-
-  
 
   //   const [event] = await db
   //     .select()
@@ -38,13 +33,11 @@ export default function EditEvent({ event, artists }: Props) {
     return date.toISOString().slice(0, 16);
   }
 
-if (!event) {
-  return <div>Loading...</div>
-}
-
+  if (!event) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    
     <div>
       <h2 className="text-2xl font-semibold">Create new event</h2>
 
@@ -62,7 +55,7 @@ if (!event) {
           placeholder="Event title"
           type="text"
         />
-        
+
         <input
           name="image"
           defaultValue={event.image ?? ""}
@@ -129,5 +122,4 @@ if (!event) {
       </form>
     </div>
   );
-};
-
+}
