@@ -1,8 +1,9 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import { Account, Profile, Session } from "next-auth";
-import { JWT } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
+import type { Account, Profile, Session } from "next-auth";
+import type { JWT } from "next-auth/jwt";
+
 export const authOptions = {
   providers: [
     GoogleProvider({
@@ -21,8 +22,13 @@ export const authOptions = {
       account?: Account | null;
       profile?: Profile | null;
     }) {
-      if (account && profile) {
-        token.googleId = profile.sub;
+
+      if (account?.provider === "google" && account.providerAccountId) {
+        token.googleId = account.providerAccountId;
+        console.log(">> Set token.googleId:", token.googleId);
+      }
+
+      if (profile?.email) {
         const existing = await db.query.users.findFirst({
           where: (u, { eq }) => eq(u.email, profile.email!),
         });
@@ -30,26 +36,25 @@ export const authOptions = {
           token.role = existing.role;
         }
       }
+
       return token;
     },
+
     async session({ session, token }: { session: Session; token: JWT }) {
+
       if (token.googleId) {
-        session.user = {
-          ...session.user,
-          // hello: "Hello!!!!",
-          googleId: token.googleId,
-        };
+        session.user.googleId = token.googleId;
       }
       if (token.role) {
         session.user.role = token.role;
       }
+
       return session;
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     async signIn({ user }: { user: any }) {
-      if (!user.email) {
-        return false;
-      }
+
+      if (!user.email) return false;
       const existing = await db.query.users.findFirst({
         where: (u, { eq }) => eq(user.email, u.email),
       });
@@ -60,6 +65,7 @@ export const authOptions = {
           image: user.image,
           role: "customer",
         });
+      } else {
       }
       return true;
     },
