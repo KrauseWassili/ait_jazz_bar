@@ -1,8 +1,9 @@
 "use client";
+import { useActionState } from "react";
+import changeEvent, { EventFormState } from "@/app/actions/update-event";
 import { useState } from "react";
-import JazzBarEvent from "@/app/types/Jazz-bar-event";
 import Artist from "@/app/types/Artist";
-import changeEvent from "@/app/actions/update-event";
+import JazzBarEvent from "@/app/types/Jazz-bar-event";
 
 interface Props {
   event: JazzBarEvent;
@@ -10,39 +11,25 @@ interface Props {
 }
 
 export default function EditEvent({ event, artists }: Props) {
-  const id = 1;
-
-  const [artistArray, setArtistArray] = useState<Artist[]>([]);
-  const [edit, setEdit] = useState(false);
-
-  //   const [event] = await db
-  //     .select()
-  //     .from(eventsTable)
-  //     .where(eq(eventsTable.id, id));
-
-  //   const artists = await db.select().from(artistsTable).orderBy(artistsTable.id);
-
-  //   const artistsByEventId = artists.reduce((acc, artist) => {
-  //     if (!acc[artist.eventId]) acc[artist.eventId] = [];
-  //     acc[artist.eventId].push(artist);
-  //     return acc;
-  //   }, {} as Record<number, Artist[]>);
+  const [artistArray, setArtistArray] = useState<Artist[]>(artists);
+  const [state, formAction] = useActionState<EventFormState, FormData>(
+    changeEvent,
+    { errors: {} }
+  );
 
   function toDatetimeLocal(value: string | Date): string {
     const date = value instanceof Date ? value : new Date(value);
     return date.toISOString().slice(0, 16);
   }
 
-  if (!event) {
-    return <div>Loading...</div>;
-  }
+  if (!event) return <div>Loading...</div>;
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold">Create new event</h2>
+      <h2 className="text-2xl font-semibold">Edit event</h2>
 
-      <form action={changeEvent}>
-        <input type="hidden" name="id" value={id} />
+      <form action={formAction}>
+        <input type="hidden" name="id" value={event.id} />
         <input
           type="hidden"
           name="artistsArray"
@@ -63,22 +50,20 @@ export default function EditEvent({ event, artists }: Props) {
           type="text"
         />
 
-        {/* <NewArtist value={artistArray} onChange={setArtistArray} /> */}
-
-        {/* <ul>
-            {artistArray.map((artist, idx) => (
-              <li key={idx}>
-                {artist.artistName} — {artist.instrumentRole}
-                {artist.artistImage ? (
-                  <img
-                    src={artist.artistImage}
-                    alt={artist.artistName}
-                    style={{ width: 300, verticalAlign: "middle" }}
-                  />
-                ) : null}
-              </li>
-            ))}
-          </ul> */}
+        <ul>
+          {artistArray.map((artist, idx) => (
+            <li key={idx}>
+              {artist.artistName} — {artist.instrumentRole}
+              {artist.artistImage && (
+                <img
+                  src={artist.artistImage}
+                  alt={artist.artistName}
+                  style={{ width: 300, verticalAlign: "middle" }}
+                />
+              )}
+            </li>
+          ))}
+        </ul>
 
         <textarea
           name="description"
@@ -118,7 +103,11 @@ export default function EditEvent({ event, artists }: Props) {
           type="tel"
         />
 
-        <button type="submit">Create event</button>
+        {state.errors?._form && (
+          <p className="text-red-600">{state.errors._form[0]}</p>
+        )}
+
+        <button type="submit">Save changes</button>
       </form>
     </div>
   );

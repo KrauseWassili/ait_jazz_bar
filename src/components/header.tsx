@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import ThemeToggle from "./theme-toggle";
 import GoogleSignIn from "./google-sign-in";
 
 export default function Header() {
@@ -14,12 +12,7 @@ export default function Header() {
     <header className="w-full">
       <nav className="bg-accent py-4 relative w-full">
         <div className="flex items-center justify-center relative w-full">
-          {/* === Переключатель темы у левого края === */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 pl-4">
-            <ThemeToggle />
-          </div>
-
-          {/* === Центральная навигация === */}
+                    
           <div className="flex items-center justify-center space-x-8">
             <Link
               href="/"

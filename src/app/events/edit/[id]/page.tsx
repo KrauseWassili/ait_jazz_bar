@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import EventForm from "@/components/event-form";
 import { db } from "@/db";
 import { events as eventsTable, artists as artistsTable } from "@/db/schema";
@@ -9,7 +11,6 @@ export default async function EditEventPage({
   params: { id: string };
 }) {
   const id = Number((await params).id);
-
 
   const [eventRaw] = await db
     .select()

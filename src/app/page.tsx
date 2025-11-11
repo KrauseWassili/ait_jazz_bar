@@ -1,9 +1,9 @@
-import GreetingSection from "@/components/greeting-section/greeting-section";
+import GreetingSection from "@/components/greeting-section";
 
 export default function Home() {
   return (
-    <div>
+    
       <GreetingSection />
-    </div>
+    
   );
 }

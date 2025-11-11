@@ -28,9 +28,9 @@ export const EventCard = ({ event }: Props) => {
     <div
       className="
         w-72 h-[420px]
-        bg-[var(--secondary)]/10
+        bg-secondary/10
         backdrop-blur-sm
-        border border-[#de7b13];
+        border border-[#de7b13]
         hover:shadow-8x4
         overflow-hidden flex flex-col items-center 
         transition-transform duration-300 hover:-translate-y-2
@@ -44,15 +44,15 @@ export const EventCard = ({ event }: Props) => {
           alt={title}
           className="w-full h-full object-cover rounded-none"
         />
-        <div className="absolute inset-0 bg-[var(--accent)]/20 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-accent/20 mix-blend-multiply"></div>
       </div>
 
-      <div className="p-4 min-h-screen">
-        <h3 className="text-lg font-semibold text-[var(--accent)]">{place}</h3>
-        <p className="text-sm text-[var(--foreground)] mt-2 line-clamp-2">
+      <div className="flex flex-col justify-between flex-1 w-full text-center p-2">
+        <h3 className="text-lg font-semibold text-accent">{place}</h3>
+        <p className="text-sm text-foreground mt-2 line-clamp-2">
           {description}
         </p>
-        <p className="text-xs text-[var(--other)] mt-auto">
+        <p className="text-xs text-other mt-auto">
           {datetime?.toLocaleString()}
         </p>
       </div>

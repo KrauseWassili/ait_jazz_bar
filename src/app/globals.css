@@ -7,26 +7,12 @@
   --secondary: #fcd55b;
   --other: #721605;
 }
-.dark {
-  --background: #222222;
-  --foreground: #721605;
-  --accent: #ae1c0c;
-  --border: #de7b13;
-  --secondary: #fcd55b;
-  --other: #638687;
-  
-}
+
 
 .text-shadow {
   text-shadow: 1px 2px 6px rgba(255, 255, 255, 0.144);
 }
-/* Можно завести вариации */
-.text-shadow-lg {
-  text-shadow: 2px 4px 16px rgba(0,0,0,0.3);
-}
-.text-shadow-accent {
-  text-shadow: 0 2px 8px var(--accent);
-}
+
 
 @theme inline {
   --color-background: var(--background);

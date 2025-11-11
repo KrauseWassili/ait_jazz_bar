@@ -27,30 +27,33 @@ export default function OurTeam() {
   ];
 
   return (
-    <div className="p-4 min-h-screen">
-      <h1 className="text-4xl font-bold mb-10 text-gray-800 text-center">
+    <div className="p-4 flex-1 flex flex-col">
+      <h1 className="text-4xl font-bold mt-10 text-gray-800 text-center">
         The People Behind the Code
       </h1>
-      <p className="text-center text-lg text-gray-700 mb-12 opacity-90">
-        Meet the people building the product — a compact, focused engineering team.
-      </p>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 place-items-center">
-        {team.map((member) => (
-          <li key={member.name} className="flex justify-center items-stretch w-full">
-            <div className="flex flex-col bg-[#f9f4ec] ring-1 ring-gray-200 shadow hover:shadow-lg transition-shadow p-8  w-72 h-[420px] text-center">
-              <h3 className="italic text-amber-700 text-base mb-1">{member.title}</h3>
-              <p className="font-bold text-lg mb-2 text-gray-900">{member.name}</p>
-              <p className="text-gray-700 opacity-90 text-sm">{member.description}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-14 text-center">
-        <p className="text-xl text-gray-700 font-semibold">
-          Bold minds. Smart code. Real impact.
+      <div className="flex-1 flex flex-col justify-center">
+        <p className="text-center text-xl text-black/60 mb-16">
+          Meet the people building the product — a compact, focused engineering team.
         </p>
+
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 place-items-center ">
+          {team.map((member) => (
+            <li key={member.name} className="flex justify-center items-stretch w-full ">
+              <div className="flex flex-col bg-[#f9f4ec] border-[#de7b13] p-8 w-72 h-[250px] text-center border">
+                <h3 className="italic text-amber-700 text-base mb-1">{member.title}</h3>
+                <p className="font-bold text-lg mb-2 text-gray-900">{member.name}</p>
+                <p className="text-gray-700 opacity-90 text-sm">{member.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-16 text-center">
+          <p className="text-xl italic text-black/70 font-semibold">
+            Bold minds. Smart code. Real impact.
+          </p>
+        </div>
       </div>
     </div>
   );
