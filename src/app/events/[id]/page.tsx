@@ -45,7 +45,7 @@ export default async function EventPage({
   return (
     <div className="px-4 sm:px-6 lg:px-8 ">
       {/* Кнопки справа сверху */}
-      <div className="absolute top-3 right-3 flex gap-2">
+      <div className="absolute top-3 right-52 flex gap-2">
         <Link
           href={`/events/edit/${id}`}
           className="bg-amber-500 hover:bg-amber-600 text-white text-sm px-3 py-1.5 rounded-md transition"
@@ -82,7 +82,7 @@ export default async function EventPage({
         </div>
       </section> */}
       <div
-        className=" mt-6 border rounded-xl shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
+        className=" mt-6 border shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
         style={{
           backgroundColor: "var(--border)",
           borderColor: "var(--border)",
@@ -93,7 +93,7 @@ export default async function EventPage({
 
         {event.image && (
           <div
-            className="p-2 rounded-md border"
+            className="p-2 border"
             style={{
               backgroundColor: "var(--other)", // фон рамки внутренней
               borderColor: "var(--accent)",
@@ -102,7 +102,7 @@ export default async function EventPage({
             <img
               src={event.image}
               alt={event.title}
-              className="w-full h-60 object-cover rounded-md"
+              className="w-full h-60 object-cover"
             />
           </div>
         )}
@@ -140,7 +140,7 @@ export default async function EventPage({
                     borderColor: "var(--border)",
                     color: "var(--foreground)",
                   }}
-                  className="border p-4 rounded-2xl shadow-sm flex flex-col justify-between h-80"
+                  className="border p-4 shadow-sm flex flex-col justify-between h-80"
                 >
                   <p className="font-semibold text-center">
                     {artist.artistName}
@@ -151,7 +151,7 @@ export default async function EventPage({
 
                   {artist.artistImage && (
                     <div
-                      className="flex justify-center mt-auto rounded-md border"
+                      className="flex justify-center mt-auto border"
                       style={{
                         backgroundColor: "var(--other)", // фон рамки внутренней
                         borderColor: "var(--accent)",
@@ -160,7 +160,7 @@ export default async function EventPage({
                       <img
                         src={artist.artistImage}
                         alt={artist.artistName}
-                        className="h-60 w-full object-contain rounded border"
+                        className="h-60 w-full object-contain border"
                         style={{ borderColor: "var(--accent)" }}
                       />
                     </div>
@@ -170,7 +170,6 @@ export default async function EventPage({
             </ul>
             <div className="mt-4 flex justify-center">
               <div
-                className="inline-flex flex-col items-center px-3 py-1 rounded-md border text-sm font-medium"
                 style={{
                   backgroundColor: "var(--border)",
                   borderColor: "var(--accent)",
@@ -180,7 +179,7 @@ export default async function EventPage({
                 <p >☎️ {event.phone}</p>
                 
               </div>
-              <p className="inline-flex flex-col items-center px-3 py-1 rounded-md border text-sm font-medium"
+              <p className="inline-flex flex-col items-center px-3 py-1  border text-sm font-medium"
                 style={{
                   backgroundColor: "var(--border)",
                   borderColor: "var(--accent)",
