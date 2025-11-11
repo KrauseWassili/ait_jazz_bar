@@ -1,26 +1,62 @@
-export default function About() {
+// app/our-team/page.tsx
+
+export default function OurTeam() {
+  // Описываем команду как массив объектов для легкости рендера
+  const team = [
+    {
+      title: "Team Leader",
+      name: "Wassili Krause",
+      description:
+        "Wassili leads the engineering team, sets technical direction, and coordinates delivery. Enjoys system architecture, mentoring engineers, and aligning product goals with engineering priorities.",
+    },
+    {
+      title: "Programmer 1",
+      name: "Alexej Luja",
+      description:
+        "Alexej specializes in modern frontend development (React, TypeScript, component design). Focused on UX, performance, and building reusable UI systems.",
+    },
+    {
+      title: "Programmer 2",
+      name: "Natalia Fedorenko",
+      description:
+        "Natalia builds and maintains APIs, databases, and server-side systems. Experienced with scalable architectures, testing, and observability.",
+    },
+    {
+      title: "Programmer 3",
+      name: "Ruslana Sopiadis",
+      description:
+        "Ruslana Casey works across the stack: shipping features from prototype to production. Loves automation, developer tooling, and improving deployment velocity.",
+    },
+  ];
+
   return (
-    <div className="p-12 bg-accent h-lvh">
-      <h2 className="mx-14 my-10 font-extrabold text-4xl">About us</h2>
-      <p>
-        Imagine a multi-platform digital environment with instant access to
-        hundreds of licensed board games…
+    <div className="p-4 min-h-screen">
+      <h1 className="text-4xl font-bold mb-10 text-gray-800 text-center">The People Behind the Code</h1>
+      <p className="text-center text-lg text-gray-700 mb-12 opacity-90">
+        Meet the people building the product — a compact, focused engineering team.
       </p>
-      <ul className="flex flex-col gap-4">
-        <li>
-          Welcome to Tabletopia! Online arena for playing board games just like
-          in real life. Play directly in modern desktop web browsers on Mac and
-          Windows platforms, or download on Steam, App Store and Google Play.
-        </li>
-        <li>
-          Unique editor for building new board games from scratch and bringing
-          paper games to the digital.
-        </li>
-        <li>
-          No programming skills required! Specialized tools for playtesting,
-          demonstrating, promoting, and monetizing your games.
-        </li>
+
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 place-items-center">
+        {team.map((member, i) => (
+          <li
+            key={member.name}
+            className="flex justify-center items-stretch w-full"
+          >
+            <div
+              className="flex flex-col bg-white rounded-2xl ring-1 ring-gray-200 shadow hover:shadow-lg transition-shadow p-8 w-[320px] min-h-[330px]"
+            >
+              <h3 className="italic text-amber-700 text-base mb-1">{member.title}</h3>
+              <p className="font-bold text-lg mb-2 text-gray-900">{member.name}</p>
+              <p className="text-gray-700 opacity-90 text-sm">{member.description}</p>
+            </div>
+          </li>
+        ))}
       </ul>
+      
+
+      <div className="mt-14 text-center">
+        <p className="text-xl text-gray-700 font-semibold">Bold minds. Smart code. Real impact.</p>
+      </div>
     </div>
   );
 }
