@@ -2,7 +2,7 @@
 export default function NotFound() {
   return (
     <div>
-      Ganeral not found
+      General not found
     </div>
   )
 }
