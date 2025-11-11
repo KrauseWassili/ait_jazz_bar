@@ -36,33 +36,31 @@ export default async function EventPage({
   }, {} as Record<number, Artist[]>);
 
   async function handleDelete() {
-  "use server";
-  await deleteEvent(id);
-  revalidatePath("/events");
-  redirect("/events");
-}
-
+    "use server";
+    await deleteEvent(id);
+    revalidatePath("/events");
+    redirect("/events");
+  }
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 ">
-
       {/* Кнопки справа сверху */}
-  <div className="absolute top-3 right-3 flex gap-2">
-    <Link
-      href={`/events/edit/${id}`}
-      className="bg-amber-500 hover:bg-amber-600 text-white text-sm px-3 py-1.5 rounded-md transition"
-    >
-      ✏️ Edit
-    </Link>
-    <form action={handleDelete}>
-      <button
-        type="submit"
-        className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-md transition"
-      >
-        🗑 Delete
-      </button>
-    </form>
-  </div>
+      <div className="absolute top-3 right-52 flex gap-2">
+        <Link
+          href={`/events/edit/${id}`}
+          className="bg-amber-500 hover:bg-amber-600 text-white text-sm px-3 py-1.5 rounded-md transition"
+        >
+          ✏️ Edit
+        </Link>
+        <form action={handleDelete}>
+          <button
+            type="submit"
+            className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-md transition"
+          >
+            🗑 Delete
+          </button>
+        </form>
+      </div>
       {/* <button type="button" name="edit" onClick={()=>setEdit(!edit)}>Edit event</button> */}
 
       {/* <section>
@@ -84,9 +82,9 @@ export default async function EventPage({
         </div>
       </section> */}
       <div
-        className="mt-6 border rounded-xl shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
+        className=" mt-6 border shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
         style={{
-          backgroundColor: "var(--background)",
+          backgroundColor: "var(--border)",
           borderColor: "var(--border)",
           color: "var(--foreground)",
         }}
@@ -94,32 +92,40 @@ export default async function EventPage({
         <h4 className="text-xl font-semibold text-center">{event.title}</h4>
 
         {event.image && (
-          <img
-            src={event.image}
-            alt={event.title}
-            className="w-full h-60 object-cover rounded-md border"
-            style={{ borderColor: "var(--accent)" }}
-          />
+          <div
+            className="p-2 border"
+            style={{
+              backgroundColor: "var(--other)", // фон рамки внутренней
+              borderColor: "var(--accent)",
+            }}
+          >
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-60 object-cover"
+            />
+          </div>
         )}
 
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm mt-2">
+        <div className="font-bold flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm mt-2">
           <p>
-            📍 <span style={{ color: "var(--secondary)" }}>{event.place}</span>
+            📍 <span style={{ color: "var(--accent)" }}>{event.place}</span>
           </p>
           {event.datetime && (
             <p>
               🕙{" "}
-              <span style={{ color: "var(--secondary)" }}>
+              <span style={{ color: "var(--accent)" }}>
                 {new Date(event.datetime).toLocaleString()}
               </span>
             </p>
           )}
-          <p className="font-medium">
+          <p className="font-bold">
             💶 <span style={{ color: "var(--other)" }}>{event.price}€</span>
           </p>
         </div>
       </div>
       {/* <p className="text-base text-center">{event.description}</p> */}
+
       <h4 className="text-2xl">Artists</h4>
       <section>
         {artistsByEventId[event.id] ? (
@@ -129,11 +135,11 @@ export default async function EventPage({
                 <li
                   key={artist.id}
                   style={{
-                    backgroundColor: "var(--background)",
+                    backgroundColor: "var(--border)",
                     borderColor: "var(--border)",
                     color: "var(--foreground)",
                   }}
-                  className="border p-4 rounded-2xl shadow-sm flex flex-col justify-between h-80"
+                  className="border p-4 shadow-sm flex flex-col justify-between h-80"
                 >
                   <p className="font-semibold text-center">
                     {artist.artistName}
@@ -141,12 +147,19 @@ export default async function EventPage({
                   <p className="text-gray-600 text-center">
                     {artist.instrumentRole}
                   </p>
+
                   {artist.artistImage && (
-                    <div className="flex justify-center mt-auto">
+                    <div
+                      className="flex justify-center mt-auto border"
+                      style={{
+                        backgroundColor: "var(--other)", // фон рамки внутренней
+                        borderColor: "var(--accent)",
+                      }}
+                    >
                       <img
                         src={artist.artistImage}
                         alt={artist.artistName}
-                        className="mt-0.5 h-60 w-full object-contain rounded border"
+                        className="h-60 w-full object-contain border"
                         style={{ borderColor: "var(--accent)" }}
                       />
                     </div>
@@ -154,9 +167,28 @@ export default async function EventPage({
                 </li>
               ))}
             </ul>
-            <div className="mt-6 text-center">
-              <p className="text-gray-600">☎️ {event.phone}</p>
-              <p> 📩 {event.email}</p>
+            <div className="flex justify-center mt-4">
+              <p
+                className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold"
+                style={{
+                  backgroundColor: "var(--border)",
+                  borderColor: "var(--accent)",
+                  color: "var(--foreground)",
+                }}
+              >
+                ☎️{event.phone}
+              </p>
+              <p
+                className="inline-flex flex-col items-center px-3 py-1  border text-sm font-bold"
+                style={{
+                  backgroundColor: "var(--border)",
+                  borderColor: "var(--accent)",
+                  color: "var(--foreground)",
+                }}
+              >
+                {" "}
+                📩 {event.email}
+              </p>
             </div>
           </>
         ) : (
