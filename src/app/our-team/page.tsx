@@ -52,6 +52,7 @@ export default function OurTeam() {
           </li>
         ))}
       </ul>
+      
 
       <div className="mt-14 text-center">
         <p className="text-xl text-gray-700 font-semibold">Bold minds. Smart code. Real impact.</p>
