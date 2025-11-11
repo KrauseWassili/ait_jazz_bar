@@ -1,6 +1,6 @@
 @import "tailwindcss";
 :root {
-  --background: #688C8C;
+  --background: #638687;
   --foreground: #222222;
   --accent: #ae1c0c;
   --border: #de7b13;
@@ -16,6 +16,18 @@
   --other: #638687;
   
 }
+
+.text-shadow {
+  text-shadow: 1px 2px 6px rgba(255, 255, 255, 0.144);
+}
+/* Можно завести вариации */
+.text-shadow-lg {
+  text-shadow: 2px 4px 16px rgba(0,0,0,0.3);
+}
+.text-shadow-accent {
+  text-shadow: 0 2px 8px var(--accent);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
