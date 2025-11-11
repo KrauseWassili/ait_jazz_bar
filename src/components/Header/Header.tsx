@@ -37,10 +37,10 @@ export default function Header() {
               Profile
             </Link>
             <Link
-              href={"/about"}
+              href={"/our-team"}
               className="text-secondary hover:text-foreground transition-colors"
             >
-              About
+              Our team
             </Link>
 
             <GoogleSignIn />
