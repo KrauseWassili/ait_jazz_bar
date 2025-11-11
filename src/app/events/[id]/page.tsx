@@ -126,7 +126,6 @@ export default async function EventPage({
       </div>
       {/* <p className="text-base text-center">{event.description}</p> */}
 
-      
       <h4 className="text-2xl">Artists</h4>
       <section>
         {artistsByEventId[event.id] ? (
@@ -168,23 +167,28 @@ export default async function EventPage({
                 </li>
               ))}
             </ul>
-            <div className="mt-4 flex justify-center">
-              <div
+            <div className="flex justify-center mt-4">
+              <p
+                className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold"
                 style={{
                   backgroundColor: "var(--border)",
                   borderColor: "var(--accent)",
                   color: "var(--foreground)",
                 }}
               >
-                <p >☎️ {event.phone}</p>
-                
-              </div>
-              <p className="inline-flex flex-col items-center px-3 py-1  border text-sm font-medium"
+                ☎️{event.phone}
+              </p>
+              <p
+                className="inline-flex flex-col items-center px-3 py-1  border text-sm font-bold"
                 style={{
                   backgroundColor: "var(--border)",
                   borderColor: "var(--accent)",
                   color: "var(--foreground)",
-                }}> 📩 {event.email}</p>
+                }}
+              >
+                {" "}
+                📩 {event.email}
+              </p>
             </div>
           </>
         ) : (
