@@ -44,8 +44,7 @@ export default async function EventPage({
 
   return (
     <div className="p-4 flex-1 flex flex-col sm:px-6 lg:px-8">
-      {/* Кнопки Edit/Delete */}
-      <div className="absolute top-3 right-52 flex gap-2">
+           <div className="absolute top-3 right-52 flex gap-2">
         <Link
           href={`/events/edit/${id}`}
           className="bg-amber-500 hover:bg-amber-600 text-white text-sm px-3 py-1.5 rounded-md transition"
@@ -62,10 +61,10 @@ export default async function EventPage({
         </form>
       </div>
 
-      {/* --- Основной контент --- */}
+      
       <main className="flex-1">
         <div
-          className="mt-6 border shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
+          className="mt-3 border shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
           style={{
             backgroundColor: "var(--border)",
             borderColor: "var(--border)",
@@ -169,8 +168,7 @@ export default async function EventPage({
         </section>
       </main>
 
-      {/* --- Футер, всегда внизу --- */}
-      <footer className="flex justify-center gap-4 mt-5 pb-8">
+      <footer className="flex justify-center gap-4 mt-5">
         <p
           className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold w-70"
           style={{
