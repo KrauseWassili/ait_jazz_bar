@@ -8,6 +8,7 @@ import GoogleSignIn from "./google-sign-in";
 
 export default function Header() {
   const { data: session, status } = useSession();
+  console.log(session?.user);
 
   return (
     <header className="w-full">
@@ -39,18 +40,18 @@ export default function Header() {
               Our team
             </Link>
           </div>
+          
 
           {/* === Аватарка и кнопка входа справа === */}
           <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center space-x-4 pr-4">
             {status === "authenticated" && session?.user?.image && (
               <Link href="/profile" className="flex items-center">
-                <Image
+                <img
                   src={session.user.image}
                   alt={session.user.name || "avatar"}
                   width={36}
                   height={36}
                   className="rounded-full border border-foreground/20 hover:border-foreground transition"
-                  unoptimized
                 />
               </Link>
             )}
@@ -61,3 +62,4 @@ export default function Header() {
     </header>
   );
 }
+
