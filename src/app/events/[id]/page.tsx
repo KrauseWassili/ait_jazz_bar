@@ -82,7 +82,7 @@ export default async function EventPage({
         </div>
       </section> */}
       <div
-        className=" mt-6 border shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
+        className="mt-6 border shadow-md p-4 flex flex-col gap-4 max-w-xl mx-auto"
         style={{
           backgroundColor: "var(--border)",
           borderColor: "var(--border)",
@@ -91,19 +91,27 @@ export default async function EventPage({
       >
         <h4 className="text-xl font-semibold text-center">{event.title}</h4>
 
+        {/* Блок с изображением и описанием в одну строку */}
         {event.image && (
-          <div
-            className="p-2 border"
-            style={{
-              backgroundColor: "var(--other)", // фон рамки внутренней
-              borderColor: "var(--accent)",
-            }}
-          >
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-60 object-cover"
-            />
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* Картинка слева — фиксированная высота и ширина */}
+            <div
+              className="p-2 border flex-shrink-0 flex items-center justify-center"
+              style={{
+                backgroundColor: "var(--other)",
+                borderColor: "var(--accent)",
+              }}
+            >
+              <img
+                src={event.image}
+                alt={event.title}
+                className="h-60 w-60 object-cover"
+              />
+            </div>
+            {/* Описание справа — по центру по вертикали */}
+            <div className="flex-1 flex items-center">
+              <p className="text-xl text-accent px-2">{event.description}</p>
+            </div>
           </div>
         )}
 
@@ -120,79 +128,80 @@ export default async function EventPage({
             </p>
           )}
           <p className="font-bold">
-            💶 <span style={{ color: "var(--other)" }}>{event.price}€</span>
+            <span className="text-other text-xl">💸{event.price}€</span>
           </p>
         </div>
       </div>
+
       {/* <p className="text-base text-center">{event.description}</p> */}
 
-      <h4 className="text-2xl">Artists</h4>
+      <h4 className="text-2xl text-center m-4">Artists</h4>
       <section>
-        {artistsByEventId[event.id] ? (
+        {artistsByEventId[event.id] && artistsByEventId[event.id].length > 0 ? (
           <>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 auto-rows-fr">
-              {artistsByEventId[event.id].map((artist) => (
-                <li
-                  key={artist.id}
-                  style={{
-                    backgroundColor: "var(--border)",
-                    borderColor: "var(--border)",
-                    color: "var(--foreground)",
-                  }}
-                  className="border p-4 shadow-sm flex flex-col justify-between h-80"
-                >
-                  <p className="font-semibold text-center">
-                    {artist.artistName}
-                  </p>
-                  <p className="text-gray-600 text-center">
-                    {artist.instrumentRole}
-                  </p>
+            <div className="w-full flex justify-center">
+  <ul className="flex flex-row justify-center gap-4">
+    {artistsByEventId[event.id].map((artist) => (
+      <li
+        key={artist.id}
+        style={{
+          backgroundColor: "var(--border)",
+          borderColor: "var(--border)",
+          color: "var(--foreground)",
+        }}
+        className="border p-4 shadow-sm flex flex-col justify-between h-80 w-70" 
+      >
+        <p className="font-semibold text-center">{artist.artistName}</p>
+        <p className="text-gray-600 text-center">{artist.instrumentRole}</p>
+        {artist.artistImage && (
+          <div
+            className="flex justify-center mt-auto border"
+            style={{
+              backgroundColor: "var(--other)",
+              borderColor: "var(--accent)",
+            }}
+          >
+            <img
+              src={artist.artistImage}
+              alt={artist.artistName}
+              className="h-60 w-full object-contain border"
+              style={{ borderColor: "var(--accent)" }}
+            />
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
 
-                  {artist.artistImage && (
-                    <div
-                      className="flex justify-center mt-auto border"
-                      style={{
-                        backgroundColor: "var(--other)", // фон рамки внутренней
-                        borderColor: "var(--accent)",
-                      }}
-                    >
-                      <img
-                        src={artist.artistImage}
-                        alt={artist.artistName}
-                        className="h-60 w-full object-contain border"
-                        style={{ borderColor: "var(--accent)" }}
-                      />
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-            <div className="flex justify-center mt-4">
-              <p
-                className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold"
-                style={{
-                  backgroundColor: "var(--border)",
-                  borderColor: "var(--accent)",
-                  color: "var(--foreground)",
-                }}
-              >
-                ☎️{event.phone}
-              </p>
-              <p
-                className="inline-flex flex-col items-center px-3 py-1  border text-sm font-bold"
-                style={{
-                  backgroundColor: "var(--border)",
-                  borderColor: "var(--accent)",
-                  color: "var(--foreground)",
-                }}
-              >
-                {" "}
-                📩 {event.email}
-              </p>
-            </div>
+            <div className="flex justify-center mt-4 gap-4">
+  <p
+    className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold w-70"
+    style={{
+      backgroundColor: "var(--border)",
+      borderColor: "var(--accent)",
+      color: "var(--foreground)",
+    }}
+  >
+    ☎️ {event.phone}
+  </p>
+  <p
+    className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold w-70"
+    style={{
+      backgroundColor: "var(--border)",
+      borderColor: "var(--accent)",
+      color: "var(--foreground)",
+    }}
+  >
+    📩 {event.email}
+  </p>
+</div>
+
           </>
         ) : (
-          <p className="text-gray-500">No artists listed for this event.</p>
+          <p className="text-gray-500 text-center">
+            No artists listed for this event.
+          </p>
         )}
       </section>
     </div>

@@ -21,7 +21,7 @@ const ProfilePage = async () => {
           maxWidth: "90vw",
         }}
       >
-        <h1 className="text-3xl font-bold text-gray-800 mb-4 whitespace-nowrap">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4 whitespace-nowrap">
           Hello,{" "}
           <span className="text-amber-600">{session.user.email}</span>
         </h1>
