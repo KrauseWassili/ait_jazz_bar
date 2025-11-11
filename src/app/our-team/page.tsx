@@ -38,7 +38,7 @@ export default function OurTeam() {
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 place-items-center">
         {team.map((member) => (
           <li key={member.name} className="flex justify-center items-stretch w-full">
-            <div className="flex flex-col bg-[#f9f4ec] ring-1 ring-gray-200 shadow hover:shadow-lg transition-shadow p-8 w-[320px] min-h-[330px] text-center">
+            <div className="flex flex-col bg-[#f9f4ec] ring-1 ring-gray-200 shadow hover:shadow-lg transition-shadow p-8  w-72 h-[420px] text-center">
               <h3 className="italic text-amber-700 text-base mb-1">{member.title}</h3>
               <p className="font-bold text-lg mb-2 text-gray-900">{member.name}</p>
               <p className="text-gray-700 opacity-90 text-sm">{member.description}</p>
