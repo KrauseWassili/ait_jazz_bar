@@ -37,7 +37,6 @@ export const EventCard = ({ event }: Props) => {
         rounded-none
       "
     >
-     
       <div className="relative w-full aspect-square">
         <img
           src={image ?? ""}
@@ -53,7 +52,13 @@ export const EventCard = ({ event }: Props) => {
           {description}
         </p>
         <p className="text-xs text-other mt-auto">
-          {datetime?.toLocaleString()}
+          {datetime?.toLocaleString(undefined, {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </p>
       </div>
     </div>
