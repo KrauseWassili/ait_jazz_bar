@@ -170,7 +170,7 @@ export default async function EventPage({
       </main>
 
       {/* --- Футер, всегда внизу --- */}
-      <footer className="flex justify-center gap-4 mt-auto pb-8">
+      <footer className="flex justify-center gap-4 mt-5 pb-8">
         <p
           className="inline-flex flex-col items-center px-3 py-1 border text-sm font-bold w-70"
           style={{

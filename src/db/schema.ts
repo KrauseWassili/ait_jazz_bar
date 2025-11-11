@@ -24,7 +24,7 @@ export const events = pgTable("events", {
   price: decimal(),
   email: varchar({ length: 255 }),
   phone: varchar({ length: 20 }),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp().defaultNow(),
 });
 
 //На будущее добавить отображение будущих/прошедших мероприятий по фильтру поля timestamp
