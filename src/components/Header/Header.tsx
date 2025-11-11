@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ThemeToggle from "../theme-toggle";
 import GoogleSignIn from "../google-sign-in";
+import GreetingSection from "../greeting-section/greeting-section";
 
 export default function Header() {
   return (
@@ -21,14 +22,14 @@ export default function Header() {
             >
               Events
             </Link>
-                      
+
             <Link
               href={"/events/new"}
               className="text-background hover:text-foreground transition-colors"
             >
               Create event
             </Link>
-            
+
             <Link
               href={"/profile"}
               className="text-background hover:text-foreground transition-colors"
@@ -41,12 +42,14 @@ export default function Header() {
             >
               About
             </Link>
-            
+
             <GoogleSignIn />
           </div>
+
           <ThemeToggle />
         </nav>
       </div>
     </header>
+    
   );
 }
