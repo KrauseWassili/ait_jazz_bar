@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen `}
       >
         <Providers>
           <ThemeProvider
@@ -40,7 +40,9 @@ export default function RootLayout({
             <Header /> {/* БЕЗ session */}
             {children}
           </ThemeProvider>
+          
         </Providers>
+        
       </body>
     </html>
   );
