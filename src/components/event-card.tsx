@@ -46,12 +46,14 @@ export const EventCard = ({ event }: Props) => {
         <div className="absolute inset-0 bg-accent/20 mix-blend-multiply"></div>
       </div>
 
-      <div className="flex flex-col justify-between flex-1 w-full text-center p-2">
-        <h3 className="text-lg font-semibold text-accent">{place}</h3>
-        <p className="text-sm text-foreground mt-2 line-clamp-2">
+      <div className="flex flex-col justify-between flex-1 w-full text-center p-1">
+        <h2 className="text-lg font-bold text-accent">{title}</h2>
+        
+        <p className="text-sm italic text-foreground line-clamp-2">
           {description}
         </p>
-        <p className="text-xs text-other mt-auto">
+        <p className="font-semibold text-foreground">{place}</p>
+        <p className="text-xs text-other">
           {datetime?.toLocaleString(undefined, {
             year: "numeric",
             month: "2-digit",
